@@ -1,0 +1,557 @@
+\documentclass[a4paper,12pt]{ltjsarticle}
+
+\usepackage{luatexja}
+
+\usepackage{graphicx}
+
+\usepackage[svgnames]{xcolor}
+
+\usepackage{here}
+
+\usepackage{floatflt}
+
+\usepackage{mathtools}
+
+\usepackage{mathrsfs}
+
+\usepackage{physics}
+
+\usepackage{braket}
+
+\usepackage{enumitem}
+
+\usepackage{url}
+
+\usepackage{amsmath, amssymb, amsthm, bm}
+
+\usepackage[unicode, hidelinks, pdfusetitle]{hyperref}
+
+\usepackage{nameref}
+
+\usepackage{cleveref}
+
+\usepackage{tcolorbox}
+
+\usepackage{comment}
+
+\usepackage{framed,color}
+
+\usepackage{anyfontsize}
+
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
+
+\hypersetup{
+	colorlinks=true,
+	citecolor=blue,
+	linkcolor=teal,
+	urlcolor=orange,
+}
+
+\newtheoremstyle{break}
+  {\topsep}{\topsep}%
+  {}{}%
+  {\bfseries}{}%
+  {\newline}{}%
+\theoremstyle{break}
+
+\newtheorem{thm}{Theorem}[section]
+
+\newtheorem{defn}[thm]{定義}
+\newtheorem{eg}[thm]{例}
+\newtheorem{thrm}[thm]{定理}
+\newtheorem{ax}[thm]{公理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{fact}[thm]{事実}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{req}[thm]{要請}
+\newtheorem{res}[thm]{結果}
+\newtheorem*{prf}{証明}
+
+\makeatletter
+\newenvironment{pr}[1][\proofnam]{\par
+%\newenvironment{Proof}[1][\Proofname]{\par
+  \normalfont
+  \topsep6\p@\@plus6\p@ \trivlist
+  \item[\hskip\labelsep{\itshape #1}\@addpunct{\bfseries}]\ignorespaces
+}{%
+  \endtrivlist
+}
+\newcommand{\proofnam}{\underline{Derivation.}}
+\makeatother
+
+% 圏論的量子力学
+\newcommand{\cset}{\mathbf{Set}}
+\newcommand{\fset}{\mathbf{FSet}}
+\newcommand{\rel}{\mathbf{Rel}}
+\newcommand{\frel}{\mathbf{FRel}}
+\newcommand{\vect}{\mathbf{Vect}}
+\newcommand{\fvect}{\mathbf{FVect}}
+\newcommand{\hilb}{\mathbf{Hilb}}
+\newcommand{\fhilb}{\mathbf{FHilb}}
+\newcommand{\mon}{\mathbf{Mon}}
+\newcommand{\cmon}{\mathbf{CMon}}
+\newcommand{\pre}{\mathbf{Pre}}
+\newcommand{\mbc}{\mathbb{C}}
+\newcommand{\mbr}{\mathbb{R}}
+\newcommand{\mrr}{\mathrm{R}}
+\newcommand{\prob}{\mathrm{Prob}}
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\Mor}{\mathrm{Mor}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Op}{\mathrm{op}}
+\newcommand{\xr}[1]{\xrightarrow{#1}}
+\newcommand{\xrd}[1]{\xrightarrow{#1}}
+\newcommand{\rr}[2]{\xrightrightarrows{#1}{#2}}
+\newcommand{\dom}{\mathrm{dom}}
+\newcommand{\cod}{\mathrm{cod}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\eva}{\mathrm{ev}}
+\newcommand{\coev}{\mathrm{coev}}
+\newcommand{\osi}[1]{\overset{#1}{\sim}}
+\newcommand{\iso}[1]{\underset{#1}{\sim}}
+\newcommand{\ci}{\circ}
+\newcommand{\al}{\alpha}
+\newcommand{\la}{\lambda}
+\newcommand{\si}{\sigma}
+\newcommand{\vp}{\varphi}
+\newcommand{\vP}{\varPhi} 
+\newcommand{\ve}{\varepsilon}
+\newcommand{\da}{\dagger}
+\newcommand{\dav}{\dashv} 
+\newcommand{\ra}{\Rightarrow}
+\newcommand{\lar}{\Leftarrow}
+\newcommand{\mt}{\mapsto}
+\newcommand{\ot}{\otimes}
+\newcommand{\bigot}{\bigotimes}
+\newcommand{\ti}{\times}
+\newcommand{\opl}{\oplus}
+\newcommand{\bigop}{\bigoplus}
+\newcommand{\am}{\amalg}
+\newcommand{\tra}{\mathrm{Tr}}
+\newcommand{\dime}{\mathrm{dim}}
+\newcommand{\scr}{\scriptstyle}
+
+% 解析力学
+\newcommand{\dq}{\dot{q}}
+\newcommand{\dQ}{\dot{Q}}
+\newcommand{\el}[1]{\mathscr{E}_i[{#1}]}
+\newcommand{\elk}[2]{\mathscr{E}_{#1}[{#2}]}
+% \newcommand{\el*}{\mathscr{E}_i[L^*]}
+\newcommand{\cl}{c_L}
+\newcommand{\dcl}{\dot{c}_L}
+\newcommand{\tcl}{\tilde{c}_L}
+\newcommand{\del}[1]{\frac{\partial}{\partial{#1}}}
+\newcommand{\Del}[1]{\frac{d}{d{#1}}}
+\newcommand{\ddel}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\dddel}[3]{\frac{\partial^2{#1}}{\partial{#2}\partial{#3}}}
+\newcommand{\DDel}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\deldq}{\left( \frac{\partial L}{\partial \dot{q}^i} \right)}
+\newcommand{\tq}{\tilde{q}}
+\newcommand{\dtq}{\dot{\tilde{q}}}
+
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+\numberwithin{equation}{section}
+
+\definecolor{lightgray}{rgb}{0.75,0.75,0.75}
+
+\renewenvironment{leftbar}{%
+	\def\FrameCommand{\textcolor{lightgray}{\vrule width 3pt} \hspace{3pt}}% 
+	\MakeFramed {\advance\hsize-\width \FrameRestore}}%
+{\endMakeFramed}
+
+\renewcommand{\appendixname}{Appendix}
+
+\title{接触幾何による熱力学の定式化}
+\author{Submersion, よの}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section*{まえがき}
+
+執筆中
+
+\section*{構成}
+
+執筆中
+
+\section*{注記}
+
+執筆中
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{滑らかな単一熱平衡系}
+
+熱力学を一般の多様体の言葉を用いて定義しなおす. 
+これが従来の熱力学を再現することを確かめる. 
+
+\begin{defn}[熱系]
+  多様体$M$を5次元Euclid空間$\mbr^5$とする. 
+  %Mを5次元多様体として, 局所的にR^5とするのはcontact geometryの章でする. 
+  $M$のCartesian座標を$(U,T,S,P,V)$とする. 
+  この$M$を熱系という. \\
+  $U$を内部エネルギー(internal energy), $T$を温度(temperature), $S$をエントロピー(entropy), $P$を圧力(pressure), $V$を体積(volume)という. \\
+  $M$の接バンドルを$TM$, 余接バンドルを$T^*M$とする. 
+\end{defn}
+
+熱力学第一法則が微分形式を用いて
+\begin{align*}
+  dU - TdS + PdV 
+  = 0
+\end{align*}
+で表されることから左辺の1-formを改めて定義して, この微分形式の引き戻しで熱系を特徴付けられないか考える. 
+
+\begin{defn}[Gibbs 1-form]
+  $M$上の1-form $\theta$を
+  \begin{align}
+    \label{gibbs}
+    \theta 
+    := dU - TdS + PdV
+  \end{align}
+  とする. 
+  この1-form $\theta$をGibbs 1-formという. 
+\end{defn}
+
+この多様体$M$と1-form $\theta$を用いて熱力学的な系を定義する. 
+
+\begin{defn}[Gibbs状態空間]
+  定義1.1と1.2の組$(M,\theta)$をGibbs状態空間という. 
+\end{defn}
+
+Gibbs状態空間の部分空間として熱力学的な平衡状態(熱平衡系)を定義する. 
+
+\begin{defn}[滑らかな単一熱平衡系]
+  $(M,\theta)$をGibbs状態空間とする. 
+  滑らかな単一熱平衡系(simple smooth equilibrium thermodynamic system)とは2つ組$(N,\phi)$であって以下の条件を満たす時である. 
+  \begin{itemize}
+    % \item $N$は多様体としての2次元Euclid空間$\mbr^2$であって, $M$の$C^\infty$級部分多様体である. 
+    \item $N$は$\mbr^2$の開部分多様体である. 
+    \item $\phi$は滑らかなembedding $\phi: N \to M$であって
+     \begin{align}
+      \label{first}
+      \phi^*(\theta)
+      = 0
+     \end{align}
+    を満たす. 
+    (\ref{first})を熱力学第一法則という. 
+  \end{itemize}
+\end{defn}
+
+% \begin{defn}[滑らかな単一熱平衡系]
+%   多様体$N$を2次元Euclid空間$\mbr^2$とする.  
+%   $M$へのembeddingな写像$\phi: N \to M$が存在して
+%     \begin{align}
+%       \label{first}
+%       \phi^*(\theta)
+%       = 0
+%     \end{align}
+%     を満たす$M$の$C^\infty$級部分多様体$N$を滑らかな単一熱平衡系(simple smooth equilibrium thermodynamic system)という. \\
+%     (\ref{first})式を熱力学第一法則(first law of thermodynamics)という. 
+% \end{defn}
+
+写像$\phi$の定義域$N$は従来の熱平衡系(equiliblium state)を表している. 
+例えば$N$のCartesian座標として$(T,V)$がとれるとする. 
+\footnote{
+  座標が上のようにとれる条件は後の章で補足する. 
+}
+この時, embedding $\phi$は
+\begin{align*}
+  \phi: N \to M: (T,V) \mt (U(T,V), T, S(T,V), P(T,V), V)
+\end{align*}
+となる. 
+
+今は$N$のCartesian座標として$T,V$をとったが, 他に$(S,V), (S,P), (T,P)$ 
+\footnote{
+  勿論$(P,V)$等も考えることは出来るが, 後に出てくるMaxwell関係式と関係するものだけを選んだ. 
+}
+も考えることが出来る. 
+以降はCartesian座標として$(T,V)$をとる場合のみに着目する.
+
+この定義によって従来の熱力学の様々な関係式を満たすことを見ていく. 
+
+\begin{lem}[Maxwell関係式]
+  滑らかな単一熱平衡系において
+  \begin{align}
+    \label{maxwell}
+    \phi^*(d\theta)
+    = 0
+  \end{align}
+  が成立する.  
+  (\ref{maxwell})式をMaxwell関係式という.
+\end{lem}  
+
+\begin{prf}
+  滑らかな単一熱平衡系において
+  \begin{align*}
+    \phi^*(\theta)
+    = 0
+  \end{align*}
+  より
+  \begin{align*}
+    \phi^*(d\theta) 
+    &= d \phi^*(\theta) \\
+    &= 0
+  \end{align*}
+\end{prf}
+
+\begin{thrm}
+  Maxwell関係式(\ref{maxwell})は従来のMaxwell関係式を再現する. 
+\end{thrm}
+
+\begin{prf}
+  $N$のCartesian座標として$(T,V)$がとれるとすると
+  \begin{align*}
+    \phi^*(d\theta) 
+    &= \phi^*(-dT \wedge dS + dP \wedge dV) \\
+    &= -d\phi^*(T) \wedge d\phi^*(S) + d\phi^*(P) \wedge d\phi^*(V) \\
+    &= -dT \wedge \qty(\ddel{S}{T} dT + \ddel{S}{V} dV) + \qty(\ddel{P}{T} dT + \ddel{P}{V} dV) \wedge dV \\
+    &= \qty(-\ddel{S}{V} + \ddel{P}{T}) dT \wedge dV \\
+  \end{align*}
+  (\ref{maxwell})式よりこれが$0$に等しいので
+  \begin{align}
+    \label{maxwell1}
+    \qty(\ddel{S}{V})_T 
+    = \qty(\ddel{P}{T})_V
+  \end{align}
+\end{prf}
+
+\begin{lem}
+  滑らかな単一熱平衡系において以下の関係式が成立する. 
+  \begin{align}
+    \label{ene1}
+    \ddel{U}{T} &= T \ddel{S}{T} \\
+    \label{ene2}
+    \ddel{U}{V} &= T\ddel{S}{V} - P 
+  \end{align}
+\end{lem}  
+
+\begin{prf}
+  (\ref{gibbs})式と(\ref{first})式より滑らかな単一熱平衡系において
+  \begin{align*}
+    \phi^*(d\theta) 
+    &= d\phi^*(U) - Td\phi^*(S) + Pd\phi^*(V) \\
+    &= \ddel{U}{T}dT + \ddel{U}{V}dV -T \qty(\ddel{S}{T}dT + \ddel{S}{V}dV) + PdV \\
+    &= \qty(\ddel{U}{T} - T\ddel{S}{T})dT + \qty(\ddel{U}{V} - T\ddel{S}{V} + P)dV \\
+    &= 0
+  \end{align*}
+  係数をそれぞれ比較して
+  \begin{align*}
+    \ddel{U}{T} &= T \ddel{S}{T} \\
+    \ddel{U}{V} &= T\ddel{S}{V} - P 
+  \end{align*}
+\end{prf}
+
+\begin{cor}[Energy方程式]
+  滑らかな単一熱平衡系において
+  \begin{align}
+    \label{ene}
+    \ddel{U}{V} = T\ddel{P}{T} - P
+  \end{align}
+  が成立する. 
+  (\ref{ene})式をEnergy方程式という. 
+\end{cor}  
+
+\begin{prf}
+  (\ref{ene2})に(\ref{maxwell1})を代入すれば良い. 
+\end{prf}
+
+次に理想気体を定義しよう. 
+
+\begin{defn}[理想気体]
+  $M$を熱系, $N$を滑らかな単一熱平衡系とする. 
+  $N$が理想気体(ideal gas)であるとはある実数$c$と関数$f$が存在して
+  \begin{align}
+    \label{ideal1}
+    \phi^*(PV-cT)
+    = 0 \\
+    \label{ideal2}
+    \phi^*(U-f(T))
+    = 0
+  \end{align}
+  を満たす時である. \\
+  (\ref{ideal1})式と(\ref{ideal2})式内の
+  \begin{align*}
+    PV 
+    = cT \\
+    U
+    = f(T)
+  \end{align*}
+  を状態方程式(equation of state)という. 
+\end{defn}
+
+% \begin{lem}[理想気体のenergyとentropy]
+%   a
+% \end{lem}
+
+\newpage
+
+\section{熱系の接触}
+
+熱系の接触を考えるために2つのGibbs状態空間の直積を定義する. 
+
+\begin{defn}[直積熱系]
+  $(M_1,\theta_1), (M_2,\theta_2)$をGibbs状態空間とする. 
+  この時, 2つの熱系の直積空間$M_1 \ti M_2$を直積熱系という.　\\  
+  $M_1,M_2$のCartesian座標をそれぞれ
+  \begin{align*}
+    (U_1,S_1,T_1,P_1,V_1) \\
+    (U_2,S_2,T_2,P_2,V_2)
+  \end{align*}
+  とすると, 直積熱系$M_1 \ti M_2$のCartesian座標は
+  \begin{align*}
+    (U_1,U_2,S_1,S_2,T_1,T_2,P_1,P_2,V_1,V_2)
+  \end{align*}
+  となる. 
+\end{defn} 
+
+\begin{defn}
+  $M_1,M_2$上のGibbs 1-formがそれぞれ
+  \begin{align*}
+    \theta_1
+    = dU_1 - T_1dS_1 + P_1dV_1 \\
+    \theta_2
+    = dU_2 - T_2dS_2 + P_2dV_2
+  \end{align*}
+  と表されている時, 直積熱系$M_1 \ti M_2$上の1-form $\theta'$を
+  \begin{align*}
+    \theta'
+    &:= \theta_1 + \theta_2 \\
+    &= dU_1 + dU_2 - T_1dS_1 - T_2dS_2 + P_1dV_1 + P_2dV_2
+  \end{align*}
+  とする. 
+  これも単にGibbs 1-formという. 
+\end{defn}
+  
+\begin{defn}[Gibbs直積状態空間]
+  2つ組$(M_1 \ti M_2,\theta')$をGibbs直積状態空間という. 
+\end{defn}
+
+次にGibbs直積空間の部分空間を定義する. 
+これにより熱系の接触による平衡が定義される.
+
+\begin{defn}[接触]
+  $(M_1 \ti M_2,\theta')$をGibbs直積状態空間, $(N_1,\phi_1), (N_2,\phi_2)$を滑らかな単一熱平衡系とする. 
+  4つ組$(N',M',\phi',\theta')$が接触(interaction pair)であるとは以下の条件を満たす時である. 
+  \begin{itemize}
+    \item $N'$は$N_1 \ti N_2$の開部分多様体である.
+    \item $M'$は$M_1 \ti M_2$の開部分多様体である.
+    \item $q_1 \in N_1, q_2 \in N_2$に対して$\phi'$は滑らかなembedding 
+    \begin{align*}
+      \phi': N_1 \ti N_2 \to M_1 \ti M_2: (v_1,v_2) \mt (\phi_1(v_1), \phi_2(v_2))
+    \end{align*}
+    であって
+    \begin{align*}
+      \phi'(N') \subset M'
+    \end{align*}
+    を満たす. 
+  \end{itemize}
+\end{defn}
+
+この接触の定義を用いて2つの熱系の接触が熱平衡系となる時の条件を考える. 
+
+\begin{eg}[接触の熱平衡系の条件1]
+  $M'$を$M_1 \ti M_2 = \mbr^5 \ti \mbr^5$の点$(u_1,u_2)$に対して
+  \begin{align*}
+    T_1(u_1)=T_2(u_2)
+  \end{align*}
+  を満たす$M_1 \ti M_2$の開部分多様体, 
+  $N'$を$N_1 \ti N_2$の点$(v_1,v_2)$に対して
+  \begin{align}
+    \label{equalt}
+    T_1(\phi_1(v_1))
+    = T_2(\phi_2(v_2))
+  \end{align}
+  を満たす$N_1 \ti N_2$の開部分多様体とする. \\
+  $M'$上の関数として
+  \begin{align*}
+    S':=S_1+S_2 &, U':=U_1+U_2 \\
+    T'=T_1=T_2, P_1':=P_1 &, P_2':=P_2, V_1':=V_1, V_2':=V_2
+  \end{align*}
+  とすると$M'$上の1-form $\theta'$は
+  \begin{align*}
+    \theta'
+    =dU' - T'dS' + P_1dV_1 + P_2dV_2
+  \end{align*}
+  となる. 
+  この時, embedding $\phi'：N' \to M'$は
+  \begin{align*}
+    \phi'^*(\theta')
+    = 0
+  \end{align*}
+  を満たす. \\
+  つまり$\phi'(N')$は滑らかな単一熱平衡系を定める. 
+  これは熱系の接触による熱平衡系を表している式といえる.
+  ここから分かるように体積$V$に束縛条件はなく, 
+  (\ref{equalt})式により温度$T$が等しいことが接触の熱平衡系の条件として必要であると分かる.  
+\end{eg}  
+
+\begin{eg}[接触の熱平衡系の条件2]
+  $M''$を$M_1 \ti M_2 = \mbr^5 \ti \mbr^5$の点$(u_1,u_2)$に対して
+  \begin{align*}
+    T_1(u_1)=T_2(u_2)
+  \end{align*}
+  を満たす$M_1 \ti M_2$の開部分多様体, 
+  $N''$を$N_1 \ti N_2$の点$(v_1,v_2)$に対して
+  \begin{align}
+    T_1(\phi_1(v_1))
+    = T_2(\phi_2(v_2)) \\
+    \label{equalp}
+    P_1(\phi_1(v_1))
+    = P_2(\phi_2(v_2))
+  \end{align}
+  を満たす$N_1 \ti N_2$の開部分多様体とする. \\
+  $M''$上の関数として
+  \begin{align*}
+    S'':=S_1+S_2, U'' &:=U_1+U_2, V''=V_1+V_2 \\
+    T''=T_1=T_2 &, P'':=P_1=P_2 
+  \end{align*}
+  とすると$M''$上の1-form $\theta''$は
+  \begin{align*}
+    \theta''
+    =dU'' - T''dS'' + P''dV''
+  \end{align*}
+  となる. 
+  この時, embedding $\phi''：N'' \to M''$は
+  \begin{align*}
+    \phi''^*(\theta'')
+    = 0
+  \end{align*}
+  を満たす. \\
+  つまり$\phi''(N'')$は滑らかな単一熱平衡系を定める. 
+  これは熱系の接触による熱平衡系を表している式といえる.
+  (\ref{equalp})式により圧力$P$が等しいことが接触の熱平衡系の条件として必要であると分かる.  
+\end{eg}
+
+\newpage
+
+\section{熱系の安定性}
+
+$(M_1,\theta_1),(M_2,\theta_2)$をGibbs状態空間, 
+$(N_1,\phi_1),(N_2,\phi_2)$をそれぞれ以下の条件
+\begin{align*}
+  \phi_1^*(dS_1),\phi_1^*(dV_1) \text{は線形独立である.} \\
+  \phi_2^*(dS_1),\phi_2^*(dV_2) \text{は線形独立である.}
+\end{align*}
+を追加で満たす滑らかな単一熱平衡系とする. \\
+今$N_1,N_2$の座標としてそれぞれ(局所的に)$(S_1,V_1),(S_2,V_2)$がとれるとする. この時$\phi_1,\phi_2$は
+\begin{align*}
+  \phi_1: (S_1,V_1) \mt (U_1(S_1,V_1), T_1(S_1,V_1), S_1, P_1(S_1,V_1), V_1) \\
+  \phi_2: (S_2,V_2) \mt (U_2(S_2,V_2), T_2(S_2,V_2), S_2, P_2(S_2,V_2), V_2) \\
+\end{align*}
+となる. \\
+
+
+
+\end{document}
